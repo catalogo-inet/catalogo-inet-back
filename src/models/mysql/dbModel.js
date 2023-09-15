@@ -1,12 +1,12 @@
 import { pool } from "../../db.js";
 
-export class DepartamentoModel {
-  static async getAll() {
+export class MySqlModel {
+  static async getDepartamentos() {
     const [response] = await pool.query("SELECT * FROM departamentos");
     return response;
   }
 
-  static async getById({ idDepartamento }) {
+  static async getDepartamentoById({ idDepartamento }) {
     const [response] = await pool.query(
       "SELECT * FROM departamentos WHERE Id = ?",
       [idDepartamento]

@@ -1,4 +1,4 @@
 import { createApp } from "./app.js";
-import { DepartamentoModel } from "./models/mysql/despartamento.js";
+import { MySqlModel } from "./models/mysql/dbModel.js";
 
-createApp({ departamentoModel: DepartamentoModel });
+createApp({ dbModel: MySqlModel });

@@ -1,11 +1,11 @@
 export class DepartamentoController {
-  constructor({ departamentoModel }) {
-    this.departamentoModel = departamentoModel;
+  constructor({ dbModel }) {
+    this.dbModel = dbModel;
   }
 
   getAll = async (req, res) => {
     try {
-      const result = await this.departamentoModel.getAll();
+      const result = await this.dbModel.getDepartamentos();
       console.log(result);
       res.json(result);
     } catch (err) {
@@ -16,7 +16,9 @@ export class DepartamentoController {
   getById = async (req, res) => {
     const { idDepartamento } = req.params;
     try {
-      const user = await this.departamentoModel.getById({ idDepartamento });
+      const user = await this.dbModel.getDepartamentoById({
+        idDepartamento,
+      });
       if (user.length <= 0)
         return res
           .status(404)

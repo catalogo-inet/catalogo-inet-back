@@ -1,11 +1,11 @@
 import { Router } from "express";
 import { DepartamentoController } from "../controllers/departamento.controllers.js";
 
-export const createDepartamentoRouter = ({ departamentoModel }) => {
+export const createDepartamentoRouter = ({ dbModel }) => {
   const departamentoRouter = Router();
 
   const departamentoController = new DepartamentoController({
-    departamentoModel,
+    dbModel,
   });
 
   departamentoRouter.get("/", departamentoController.getAll);
