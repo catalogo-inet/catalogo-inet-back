@@ -28,4 +28,9 @@ export class MySqlModel {
     const [response] = await pool.query("SELECT * FROM contactos");
     return response;
   }
+
+  static async getDirecciones() {
+    const [response] = await pool.query("SELECT * FROM direcciones");
+    return response;
+  }
 }
