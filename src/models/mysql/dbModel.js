@@ -13,4 +13,14 @@ export class MySqlModel {
     );
     return response;
   }
+
+  static async getSectores() {
+    const [response] = await pool.query("SELECT * FROM sectores");
+    return response;
+  }
+
+  static async getOfertas() {
+    const [response] = await pool.query("SELECT * FROM ofertas");
+    return response;
+  }
 }
