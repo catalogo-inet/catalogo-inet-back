@@ -23,4 +23,9 @@ export class MySqlModel {
     const [response] = await pool.query("SELECT * FROM ofertas");
     return response;
   }
+
+  static async getContactos() {
+    const [response] = await pool.query("SELECT * FROM contactos");
+    return response;
+  }
 }

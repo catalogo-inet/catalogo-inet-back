@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { SectoresController } from "../controllers/sectores.controllers.js";
+import { SectoresController } from "../controllers/sectores.controller.js";
 
 export const createSectoresRouter = ({ dbModel }) => {
   const sectoresRouter = Router();

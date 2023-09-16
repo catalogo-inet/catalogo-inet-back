@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { OfertasController } from "../controllers/ofertas.controllers.js";
+import { OfertasController } from "../controllers/ofertas.controller.js";
 export const createOfertasRouter = ({ dbModel }) => {
   const ofertasRouter = Router();
 

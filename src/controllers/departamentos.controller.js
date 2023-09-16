@@ -1,4 +1,4 @@
-export class DepartamentoController {
+export class DepartamentosController {
   constructor({ dbModel }) {
     this.dbModel = dbModel;
   }
