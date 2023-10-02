@@ -30,7 +30,9 @@ export class MySqlModel {
   }
 
   static async getDirecciones() {
-    const [response] = await pool.query("SELECT * FROM direcciones");
+    const [response] = await pool.query(
+      "SELECT TRIM(BOTH ' ' FROM REPLACE(d.direccion, '\t', '')) AS direccion,  TRIM(BOTH ' ' FROM REPLACE(i.Nombre, '\t', '')) AS institucion, TRIM(BOTH ' ' FROM REPLACE(j.Descripcion, '\t', '')) AS jurisdiccion, TRIM(BOTH ' ' FROM REPLACE(l.Descripcion, '\t', '')) AS localidad,  FROM direcciones AS d LEFT JOIN instituciones AS i ON d.instit_id = i.Instit_id LEFT JOIN jurisdicciones AS j ON d.jurisdiccion_id = j.Id LEFT JOIN localidades AS l ON d.localidad_id = l.Id;"
+    );
     return response;
   }
 }
