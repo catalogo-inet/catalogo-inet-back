@@ -9,6 +9,7 @@ export const createDireccionesRouter = ({ dbModel }) => {
   });
 
   direccionesRouter.get("/", direccionesController.getAll);
+  direccionesRouter.get("/:direccion", direccionesController.getByDireccion);
 
   return direccionesRouter;
 };
