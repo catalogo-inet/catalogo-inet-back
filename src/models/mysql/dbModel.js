@@ -15,4 +15,27 @@ export class MySqlModel {
     );
     return response;
   }
+
+  static async getInstituciones() {
+    const [response] = await pool.query("SELECT * FROM instituciones");
+    return response;
+  }
+
+  static async getInstitucion({ idInstitucion }) {
+    const plans = await this.getPlanById({ idInstitucion });
+    const [response] = await pool.query(
+      "SELECT * FROM instituciones WHERE Instit_Id = ?",
+      [idInstitucion]
+    );
+
+    return { ...response[0], planes: plans };
+  }
+
+  static async getPlanById({ idInstitucion }) {
+    const [response] = await pool.query(
+      "SELECT * FROM planes_estudio WHERE instit_Id = ?",
+      [idInstitucion]
+    );
+    return response;
+  }
 }
