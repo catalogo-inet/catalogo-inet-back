@@ -38,7 +38,7 @@ export class MySqlModel {
 
   static async getPlanById({ idInstitucion }) {
     const [response] = await pool.query(
-      "SELECT * FROM planes_estudio WHERE instit_Id = ?",
+      "SELECT *, TRIM(',' FROM nombre) AS nombre FROM planes_estudio WHERE instit_Id = ?",
       [idInstitucion]
     );
     return response;
