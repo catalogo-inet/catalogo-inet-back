@@ -52,4 +52,17 @@ export class MySqlModel {
 
     return response;
   }
+
+   static async getJurisdicciones() {
+    const [response] = await pool.query("SELECT * FROM jurisdicciones");
+    return response;
+  }
+
+  static async getByJurisdiccion({ Jurisdiccion_Id }) {
+    const [response] = await pool.query(
+      "SELECT * FROM jurisdicciones WHERE Id = ?",
+      [Jurisdiccion_Id]
+    );
+    return response;
+  }
 }
