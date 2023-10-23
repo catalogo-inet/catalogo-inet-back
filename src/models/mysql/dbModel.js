@@ -16,9 +16,14 @@ export class MySqlModel {
     return response;
   }
 
-  static async getInstituciones() {
-    const [response] = await pool.query("SELECT * FROM instituciones");
-    return response;
+  static async getInstituciones({ codigoPostal }) {
+    if (codigoPostal) {
+      const [info] = await this.filterInstituciones({ codigoPostal });
+      const idInstitucion = info.instit_id;
+      return this.getInstitucion({ idInstitucion });
+    } else {
+      return pool.query("SELECT * FROM instituciones");
+    }
   }
 
   static async getInstitucion({ idInstitucion }) {
@@ -36,6 +41,15 @@ export class MySqlModel {
       "SELECT * FROM planes_estudio WHERE instit_Id = ?",
       [idInstitucion]
     );
+    return response;
+  }
+
+  static async filterInstituciones({ codigoPostal }) {
+    const [response] = await pool.query(
+      "SELECT * FROM direcciones WHERE cp = ?",
+      [codigoPostal]
+    );
+
     return response;
   }
 }

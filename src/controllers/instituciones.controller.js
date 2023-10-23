@@ -4,8 +4,15 @@ export class InstitucionesController {
   }
 
   getAll = async (req, res) => {
+    const { codigoPostal } = req.query;
+    let result;
     try {
-      const result = await this.dbModel.getInstituciones();
+      if (codigoPostal) {
+        result = await this.dbModel.getInstituciones({ codigoPostal });
+      } else {
+        result = await this.dbModel.getInstituciones();
+      }
+
       console.log(result);
       res.json(result);
     } catch (err) {
