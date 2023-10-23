@@ -16,31 +16,15 @@ export class MySqlModel {
     return response;
   }
 
-  static async getInstituciones({ codigoPostal }) {
-    if (codigoPostal) {
-      const [info] = await this.filterInstituciones({ codigoPostal });
-      const idInstitucion = info.instit_id;
-      return this.getInstitucion({ idInstitucion });
-    } else {
-      return pool.query("SELECT * FROM instituciones");
-    }
+  static async getInstituciones() {
+    const response = pool.query("SELECT * FROM instituciones");
+    return response;
   }
 
   static async getInstitucion({ idInstitucion }) {
-    const plans = await this.getPlanById({ idInstitucion });
-    const [response] = await pool.query(
-      "SELECT * FROM instituciones WHERE Instit_Id = ?",
-      [idInstitucion]
-    );
-
-    return { ...response[0], planes: plans };
-  }
-
-  static async getPlanById({ idInstitucion }) {
-    const [response] = await pool.query(
-      "SELECT *, TRIM(',' FROM nombre) AS nombre FROM planes_estudio WHERE instit_Id = ?",
-      [idInstitucion]
-    );
+    const query =
+      "SELECT i.Instit_Id AS id, i.Nombre AS nombre, i.Anio_Fundacion AS fundacion, GROUP_CONCAT(DISTINCT TRIM(',' FROM p.nombre)) AS orientaciones, d.direccion AS direccion, l.Descripcion AS localidad, d.cp AS codigoPostal , dep.Descripcion AS descripcion, j.Descripcion AS jurisdiccion , o.Nombre AS tipo, g.Descripcion AS gestion FROM instituciones AS i LEFT JOIN direcciones AS d ON i.Instit_Id = d.instit_id LEFT JOIN planes_estudio AS p ON i.Instit_Id = p.instit_Id LEFT JOIN ofertas AS o ON p.oferta_id = o.Id LEFT JOIN gestiones AS g ON i.Gestion_Id = g.Id LEFT JOIN localidades AS l ON d.localidad_id = l.Id LEFT JOIN departamentos AS dep ON d.departamento_id = dep.Id LEFT JOIN jurisdicciones AS j ON d.jurisdiccion_id = j.Id WHERE i.Instit_Id = ?;";
+    const [response] = await pool.query(query, [idInstitucion]);
     return response;
   }
 
@@ -53,7 +37,7 @@ export class MySqlModel {
     return response;
   }
 
-   static async getJurisdicciones() {
+  static async getJurisdicciones() {
     const [response] = await pool.query("SELECT * FROM jurisdicciones");
     return response;
   }
