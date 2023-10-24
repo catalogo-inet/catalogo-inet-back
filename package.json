@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start:mysql": "node --watch src/server-with-mysql.js"
+    "start:mysql": "node --watch src/server-with-mysql.js",
+    "start": "node src/server-with-mysql.js"
   },
   "author": "",
   "license": "ISC",
