@@ -4,7 +4,6 @@ import { createDireccionesRouter } from "./routes/direcciones.routes.js";
 import { createInstitucionesRouter } from "./routes/instituciones.routes.js";
 import { createJurisdiccionesRouter } from "./routes/jurisdicciones.routes.js";
 
-
 export const createApp = ({ dbModel }) => {
   const app = express();
 
@@ -16,7 +15,7 @@ export const createApp = ({ dbModel }) => {
   app.use("/api/instituciones", createInstitucionesRouter({ dbModel }));
   app.use("/api/jurisdicciones", createJurisdiccionesRouter({ dbModel }));
 
-  const PORT = process.env.PORT ?? 7000;
+  const PORT = process.env.PORT ?? 8080;
 
   app.listen(PORT, () => {
     console.log(`server inciado en ${PORT}`);
