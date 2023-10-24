@@ -1,4 +1,5 @@
 import { geocodeDireccion } from "../utils/geoDireccion.js";
+import { getInstitucionesCordenates } from "../utils/getInstitucionesCordenates.js";
 
 export class InstitucionesController {
   constructor({ dbModel }) {
@@ -6,8 +7,18 @@ export class InstitucionesController {
   }
 
   getAll = async (req, res) => {
+    const { codigoPostal } = req.query;
+    let result;
     try {
-      const [result] = await this.dbModel.getInstituciones();
+      if (codigoPostal) {
+        const [response] = await this.dbModel.getInstitucionesByCP({
+          codigoPostal,
+        });
+        result = await getInstitucionesCordenates({ instituciones: response });
+        console.log(result);
+      } else {
+        result = await this.dbModel.getInstituciones();
+      }
       console.log(result);
       res.json(result);
     } catch (err) {

@@ -1,4 +1,8 @@
-export async function geocodeDireccion({ direccion, codigoPostal }) {
+export async function geocodeDireccion({
+  direccion,
+  codigoPostal,
+  jurisdiccion,
+}) {
   console.log({ direccion, codigoPostal });
   const apiUrl = `https://nominatim.openstreetmap.org/search?format=json&limit=1&q=${direccion}, ${codigoPostal}, Argentina`;
   let result = {};
